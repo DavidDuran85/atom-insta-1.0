@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import firebase from 'firebase'
+import 'bulma/css/bulma.css';
 import './App.css';
+import {
+  BrowserRouter as Router, //Enrutador
+  Switch, //navegacion entre rutas
+  Route, //ruta
+  Link //componente h-ref permite navegar entre paginas
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//pages
+import Home from './pages/home'
+import Login from './pages/login'
+
+
+let firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: "atom-insta85.firebaseapp.com",
+  databaseURL: "https://atom-insta85.firebaseio.com",
+  projectId: "atom-insta85",
+  storageBucket: "atom-insta85.appspot.com",
+  messagingSenderId: "697486915007",
+  appId: "1:697486915007:web:0b361eec96411631411d0a",
+  measurementId: "G-84N4NF1504"
+};
+
+//console.log(firebaseConfig)
+firebase.initializeApp(firebaseConfig)
+
+class App extends Component{
+  constructor(props){
+    super(props)
+  }
+  
+  render(){
+    console.log(process.env)
+    return (<div className="container">
+      <div className="section">
+        <Router>
+          <Switch>
+            <Route 
+              path="/" exact
+              component={Login}
+            />
+            <Route 
+              path="/home" exact
+              component={Home}
+            />
+          </Switch>
+        </Router>
+      </div>
+      
+
+      
+    </div>)
+  }
 }
 
 export default App;
