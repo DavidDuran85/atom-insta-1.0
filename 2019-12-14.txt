@@ -1,0 +1,37 @@
+git init
+git status
+git remove -v
+gits status
+git diff
+git add .
+git commit -m "Added files base"
+git remote add origin git@github.com:XDRAKE85/atom-insta-1.0.git
+git push -u origin master
+git  cheackout -b feature/login-with-facebook
+
+
+
+npx create-react-app atom-insta-1.0
+npm i firebase --save
+npm i bulma --save
+npm i react-router-dom --save
+
+
+https://www.uplabs.com/posts/instagram-redesign-63ca3db2-0095-471a-b9da-89e658c4b241
+
+https://drive.google.com/drive/folders/1n5qjQFhHB5SeAS839gVSzswwQWxhpuUF?usp=sharing
+
+
+links
+https://fonts.google.com/?query=pacific&selection.family=Pacifico
+https://drive.google.com/drive/folders/1n5qjQFhHB5SeAS839gVSzswwQWxhpuUF
+https://www.uplabs.com/posts/instagram-redesign-63ca3db2-0095-471a-b9da-89e658c4b241
+https://github.com/Yomguithereal/baobab-react
+https://sequelize.org
+https://www.npmjs.com/package/dotenv
+https://create-react-app.dev/docs/adding-custom-environment-variables/
+https://firebase.google.com/docs/reference/node/firebase.auth.FacebookAuthProvider
+https://developers.facebook.com/apps/733007810543334/app-review/my-permissions/
+https://firebase.google.com/docs/auth/web/email-link-auth
+https://console.firebase.google.com/project/atom-insta85/authentication/users?hl=es-419
+https://github.com/XDRAKE85/atom-insta-1.0/tree/master/public
