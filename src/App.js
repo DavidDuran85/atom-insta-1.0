@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import firebase from 'firebase'
-import 'bulma/css/bulma.css';
-import './App.css';
 import {
   BrowserRouter as Router, //Enrutador
   Switch, //navegacion entre rutas
   Route, //ruta
   Link //componente h-ref permite navegar entre paginas
 } from 'react-router-dom';
+
+// css
+import 'bulma/css/bulma.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
 //Components
 import Layout from './components/layout'
