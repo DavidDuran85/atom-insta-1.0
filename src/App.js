@@ -9,6 +9,9 @@ import {
   Link //componente h-ref permite navegar entre paginas
 } from 'react-router-dom';
 
+//Components
+import Layout from './components/layout'
+
 //pages
 import Home from './pages/home'
 import Login from './pages/login'
@@ -35,25 +38,24 @@ class App extends Component{
   
   render(){
     console.log(process.env)
-    return (<div className="container">
-      <div className="section">
+    return (
         <Router>
-          <Switch>
-            <Route 
-              path="/" exact
-              component={Login}
-            />
-            <Route 
-              path="/home" exact
-              component={Home}
-            />
-          </Switch>
-        </Router>
-      </div>
-      
 
-      
-    </div>)
+          <Layout>
+            <Switch>
+              <Route 
+                path="/" exact
+                component={Login}
+              />
+              <Route 
+                path="/home" exact
+                component={Home}
+              />
+            </Switch>
+          </Layout>
+          
+        </Router>
+      )
   }
 }
 
