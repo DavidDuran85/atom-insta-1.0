@@ -1,0 +1,31 @@
+git status
+git rm .env //elimina el archivo de git local
+git add .
+git commit -m "Updated"
+git push origin feature/login-with-facebook
+git checkout master
+git pull origin master
+npm i
+
+git checkout -b feature/layout
+git status
+git add .
+git commit -m "Added files base to component Layout"
+git push origin feature/layout
+git checkout -b feature/image-uploader
+
+npm install --save react-top-loading-bar
+npm install --save react-toastify
+
+git add .
+git commit -m "Added image-uploader"
+git push origin feature/image-uploader
+
+https://console.firebase.google.com/u/0/project/atom-insta85/storage/usage/current-billing/total_bytes
+https://console.firebase.google.com/u/0/project/atom-insta85/database/atom-insta85/data
+https://drive.google.com/drive/u/0/folders/1n5qjQFhHB5SeAS839gVSzswwQWxhpuUF
+https://bulma.io/documentation/form/file/
+https://bulma.io/documentation/form/file/
+https://www.npmjs.com/package/react-uuid
+https://www.npmjs.com/package/react-lazy-load-image-component
+https://www.npmjs.com/package/react-toastify
