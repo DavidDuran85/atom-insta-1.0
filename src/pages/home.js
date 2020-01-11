@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import LoadingBar from 'react-top-loading-bar'
 import { toast } from 'react-toastify'
+import Post from '../components/post'
 
 //let task
 class Home extends Component{
@@ -97,27 +98,9 @@ class Home extends Component{
             progress={progressUpload} 
             color="orange"
             onLoaderFinished={this.restartProgressBar} />
-            <button onClick={this.addPost}>
-                New post
-            </button>
-        <div className="file has-name">
-            <label className="file-label">
-                <input className="file-input" type="file" name="resume" onChange={this.handleChange}/>
-                <span className="file-cta">
-                    <span className="file-icon">
-                        <i className="fas fa-upload"></i>
-                    </span>
-                    <span className="file-label">
-                        Selecciona archivo…
-                    </span>
-                </span>
-                {
-                    image ? (<span className="file-name">
-                    {image.name}
-                    </span>) : null
-                }
-            </label>
-        </div>
+            <Post></Post>
+            
+        
         <div className="columns is-multiline">
             {
                 posts.map( l => {

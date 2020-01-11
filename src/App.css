@@ -5,3 +5,7 @@
 .main-title{
   font-weight: 10;
 }
+
+.modal-card{
+  width: 90vw !important;
+}

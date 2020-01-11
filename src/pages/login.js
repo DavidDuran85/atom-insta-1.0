@@ -13,6 +13,11 @@ class Login extends Component{
       try {
         let data = await firebase.auth().getRedirectResult()
         if( data.credential){
+            let user = firebase.database().ref(`users/${data.user.uid}`)
+            user.set({
+              displayName: data.user.displayName,
+              photoURL: data.user.photoURL,
+            })
             let{
                 history
             } = this.props
