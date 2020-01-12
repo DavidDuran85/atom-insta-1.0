@@ -3,14 +3,13 @@ import firebase from 'firebase'
 import LoadingBar from 'react-top-loading-bar'
 import { toast } from 'react-toastify'
 import Post from '../components/post'
+import PostCard from '../components/post-card'
 
 //let task
 class Home extends Component{
     constructor(props){
         super(props)
         this.state ={
-            image: null,
-            progressUpload: 0,
             posts: []
         }
     }
@@ -26,6 +25,8 @@ class Home extends Component{
                     id:post,
                     content:posts[post].content,
                     photoUrl: posts[post].photoUrl,
+                    authorId: posts[post].authorId,
+                    createdAt: posts[post].createdAt,
                 })
             }
             this.setState({
@@ -34,84 +35,23 @@ class Home extends Component{
         })
     }
 
-
-    handleChange = (e) => {
-        //debugger
-        let [image] = e.target.files
-        this.setState({
-            image:image
-        })
-        let name = `${new Date().toDateString()}-${image.name}`
-        let refStorage = firebase.storage().ref(`/photos/${name}`)
-        let task = refStorage.put(image)
-
-        task.on('state_changed', (snapshot) =>{
-            //debugger
-            let percentage = (snapshot.bytesTransferred / snapshot.totalBytes ) * 100
-            //this.handleCancelUpload() // cancelar carga de imagen
-            //task.cancel()
-            this.setState({
-                progressUpload: percentage < 20 ? 20 : percentage
-            })
-        }, (error) =>{
-            console.log(error)
-            toast.error(`Error: ${error.message}`, {
-                position: toast.POSITION.TOP_RIGHT
-              });
-              this.restartProgressBar()
-        }, () => {
-            task.snapshot.ref.getDownloadURL().then((url) => {
-                toast.success("Carga completada!", {
-                    position: toast.POSITION.TOP_RIGHT
-                  });
-                console.log(url)
-            })
-        })
-    }
-/*
-    handleCancelUpload = () => {
-        task.cancel()
-    }*/
-    restartProgressBar = () =>{
-        this.setState({
-            progressUpload:0
-        })
-    }
-    addPost = () => {
-        let posts= firebase.database().ref('posts')
-        let newpost= posts.push()
-        newpost.set({
-            content: `Hola ${new Date().toDateString()}`,
-            photoUrl: 'https://firebasestorage.googleapis.com/v0/b/atom-insta85.appspot.com/o/photos%2FSat%20Dec%2021%202019-flower.jpg?alt=media&token=0c378698-550f-4830-9c95-bf967a44efbd',
-            createdAt: new Date().toJSON()
-        })
-    }
     render(){
     let {
-        image,
-        progressUpload,
         posts
     } = this.state
     return(<div>
         Insta Atom
-        <LoadingBar 
-            progress={progressUpload} 
-            color="orange"
-            onLoaderFinished={this.restartProgressBar} />
-            <Post></Post>
-            
-        
-        <div className="columns is-multiline">
+        <Post />
             {
-                posts.map( l => {
+                posts.map( (p, i) => {
                     return(
-                        <div key={l.id} className="column is-4">
-                            <img  src={l.photoUrl}/>
-                        </div>
+                        <PostCard 
+                            post={p}
+                            key={i}
+                        />
                     )
                 })
             }
-        </div>
         
         </div>)
     }

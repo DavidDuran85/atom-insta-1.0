@@ -3,6 +3,7 @@ import Modal from './modal'
 import firebase from 'firebase'
 import LoadingBar from 'react-top-loading-bar'
 import { toast } from 'react-toastify'
+import uuid from 'uuid/v1'
 
 class Post extends Component{
     constructor(props){
@@ -65,7 +66,8 @@ class Post extends Component{
         let{
             formData
         } = this.state
-        let name = `${new Date().toDateString()}-${formData.image.name}`
+        let name = `${uuid()}-${formData.image.name}`
+        //let name = `${new Date().toDateString()}-${formData.image.name}`
         let refStorage = firebase.storage().ref(`/photos/${name}`)
         let task = refStorage.put(formData.image)
 
