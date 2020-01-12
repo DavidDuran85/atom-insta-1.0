@@ -40,10 +40,10 @@ class PostCard extends Component{
         return (<div className="card">
             <div className="card-header">
                 <div className="card-header-title">
-                { post.content}
+                
                     <div className="media">
                         <div className="media-left">
-                            <figure className= "image is 48x48">
+                            <figure className= "image is-48x48">
                                 <img className="is-rounded" src={author.photoURL} />
                             </figure>
                         </div>
@@ -53,6 +53,9 @@ class PostCard extends Component{
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="subtitle is-8">
+                { post.content}
             </div>
             <div className="card-image">
                 <figure className="image is-4by3">
