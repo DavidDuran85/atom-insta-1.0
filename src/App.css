@@ -9,3 +9,17 @@
 .modal-card{
   width: 90vw !important;
 }
+
+.card{
+  margin: 3rem 0;
+}
+
+.is-vertical-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fields-comments{
+  width: 100% !important;
+}

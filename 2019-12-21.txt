@@ -29,3 +29,9 @@ https://bulma.io/documentation/form/file/
 https://www.npmjs.com/package/react-uuid
 https://www.npmjs.com/package/react-lazy-load-image-component
 https://www.npmjs.com/package/react-toastify
+
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/react-fontawesome
+npm i --save @fortawesome/free-brands-svg-icons
+npm i --save @fortawesome/free-regular-svg-icons

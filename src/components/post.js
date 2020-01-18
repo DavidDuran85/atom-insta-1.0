@@ -150,11 +150,11 @@ class Post extends Component{
                     <form 
                         onSubmit={this.handleSubmit}
                     >
-                        <div classNameModal="field">
+                        <div className="field">
                             <label className="label">
                                 Titulo
                             </label>
-                            <div classNameModal="control">
+                            <div className="control">
                                 <input 
                                     type="text"
                                     value={formData.content}

@@ -42,6 +42,8 @@ class Home extends Component{
     return(<div>
         Insta Atom
         <Post />
+        <div className="columns">
+            <div className="column is-half is-offset-one-quarter">
             {
                 posts.map( (p, i) => {
                     return(
@@ -52,6 +54,9 @@ class Home extends Component{
                     )
                 })
             }
+            </div>
+        </div>
+            
         
         </div>)
     }
