@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
-
+import store from '../tree'
 
 class Login extends Component{
     constructor(props){
@@ -14,10 +14,14 @@ class Login extends Component{
         let data = await firebase.auth().getRedirectResult()
         if( data.credential){
             let user = firebase.database().ref(`users/${data.user.uid}`)
-            user.set({
+            let userFormat = {
               displayName: data.user.displayName,
               photoURL: data.user.photoURL,
-            })
+            }
+            user.set(userFormat)
+            window.localStorage.setItem('user', JSON.stringify(userFormat))
+            store.set("user",userFormat)
+            store.commit()
             let{
                 history
             } = this.props

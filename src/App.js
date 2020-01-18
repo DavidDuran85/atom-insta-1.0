@@ -7,6 +7,10 @@ import {
   Link //componente h-ref permite navegar entre paginas
 } from 'react-router-dom';
 
+//Baobab
+import { root } from 'baobab-react/higher-order'
+import store from './tree'
+
 // css
 import 'bulma/css/bulma.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -68,4 +72,6 @@ class App extends Component{
   }
 }
 
-export default App;
+const RootedApp = root(store, App)
+
+export default RootedApp;
