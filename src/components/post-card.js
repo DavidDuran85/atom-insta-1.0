@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import store from '../tree'
+import CommentPost from './comments'
 
 class PostCard extends Component {
   constructor(props) {
@@ -9,17 +11,19 @@ class PostCard extends Component {
     this.state = {
       author: null,
       loading: true,
-      comment:''
+      comment:'',
+      commentPost: []
     }
   }
   componentDidMount = () => {
     this.loadAuthor()
+    this.loadComentario()
   }
   loadAuthor = () => {
     let {
       post
     } = this.props
-    console.log(post)
+    //console.log(post)
     let authorRef = firebase.database().ref(`users/${post.authorId}`)
 
     authorRef.once('value', (snapshot) => {
@@ -27,6 +31,32 @@ class PostCard extends Component {
         author: snapshot.val(),
         loading: false
       })
+    })
+  }
+  loadComentario = () => {
+    let {
+      post
+    } = this.props
+    //console.log(post)
+    let commentRef = firebase.database().ref(`postComments/${post.id}`)
+    commentRef.on('value', (snapshot) => {
+      let comments = snapshot.val()
+      let newComents = []
+      for( let comment in comments){
+          console.log(comment)
+          newComents.push({
+              id:comment,
+              content:comments[comment].content,
+              createdAt: comments[comment].createdAt,
+              userID: comments[comment].userID,
+          })
+      }
+      
+      this.setState({
+        commentPost: newComents
+      })
+      //console.log(newComents)
+      //console.log(this.state.commentPost)
     })
   }
   handleChange = (e) => {
@@ -48,9 +78,10 @@ class PostCard extends Component {
     if(comment){
       let Comments = firebase.database().ref(`postComments/${post.id}`)
       let refCooments = Comments.push()
+      let userInfo = store.get("user")
       refCooments.set({
         content: comment,
-        userID: 'vr6yRaW4ttR5Mrn87rCFELGAex92',
+        userID: userInfo.userId,
         createdAt: new Date().toJSON()
       })
       this.setState({
@@ -69,7 +100,8 @@ class PostCard extends Component {
     let {
       loading,
       author,
-      comment
+      comment,
+      commentPost
     } = this.state
     if (loading) {
       return <div>
@@ -107,6 +139,18 @@ class PostCard extends Component {
           <img src={post.photoUrl} />
         </figure>
       </div>
+      <div className="card-content card-content-padding">
+      {
+        commentPost.map((p, i) => {
+          return (
+            <CommentPost
+              comentario={p}
+              key={i}
+            />
+          )
+        })
+      }
+      </div>
       {
         !readOnly && (<div className="card-footer">
           <form 
@@ -129,6 +173,7 @@ class PostCard extends Component {
             </div>
            
           </form>
+          
         </div>)
       }
     </div>)
@@ -136,3 +181,4 @@ class PostCard extends Component {
 }
 
 export default PostCard 
+

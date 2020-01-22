@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router, //Enrutador
   Switch, //navegacion entre rutas
   Route, //ruta
+  Redirect, //redireccionar
   Link //componente h-ref permite navegar entre paginas
 } from 'react-router-dom';
 
@@ -36,6 +37,7 @@ let firebaseConfig = {
   measurementId: "G-84N4NF1504"
 };
 
+
 //console.log(firebaseConfig)
 firebase.initializeApp(firebaseConfig)
 
@@ -45,6 +47,7 @@ class App extends Component{
   }
   
   render(){
+    let userInfo= store.get("user")
     console.log(process.env)
     return (
         <Router>
@@ -53,11 +56,10 @@ class App extends Component{
             <Switch>
               <Route 
                 path="/" exact
-                component={Login}
-              />
+                component={ userInfo === null ?  Login : Home} />
               <Route 
                 path="/home" exact
-                component={Home}
+                component={ userInfo === null ?  Login : Home}
               />
               <Route
                path="/post/:id"

@@ -11,21 +11,24 @@ class Login extends Component{
     }
     componentDidMount = async () => {
       try {
+        console.log(this.props)
         let data = await firebase.auth().getRedirectResult()
         if( data.credential){
             let user = firebase.database().ref(`users/${data.user.uid}`)
             let userFormat = {
               displayName: data.user.displayName,
               photoURL: data.user.photoURL,
+              userId: data.user.uid
             }
             user.set(userFormat)
             window.localStorage.setItem('user', JSON.stringify(userFormat))
             store.set("user",userFormat)
             store.commit()
+            console.log(this.props)
             let{
                 history
             } = this.props
-            history.push('/home') //redirecciona a la pagina(componente)
+            history.goBack() //redirecciona a la pagina(componente)
           //console.log('Sesión iniciada')
           //console.log(this.props.history)
         } else {

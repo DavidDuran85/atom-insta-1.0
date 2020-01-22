@@ -23,3 +23,9 @@
 .fields-comments{
   width: 100% !important;
 }
+.card-content-padding{
+  padding: 0.5rem;
+}
+.card-image-comment{
+  width: 1.9rem;
+}
