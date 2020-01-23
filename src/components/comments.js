@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import firebase from 'firebase'
 import Moment from 'react-moment'
 import 'moment/locale/es';
+import Anime from 'react-anime'
 
 class CommentsPost extends Component {
   constructor(props){
@@ -33,23 +34,29 @@ class CommentsPost extends Component {
     let {
       author
     } = this.state
-    console.log(comentario)
+    let animeProps={
+      opacity: [0,1],
+      translateY:[-64,0],
+      delay: (el, i) => i * 3000
+    }
     return (
       <>
       {
         !author.userID && (
-          <div className="media card-content-padding">
+          <Anime {...animeProps} >
+                <div className="media card-content-padding">
             <div className="media-left">
               <figure className="image card-image-comment">
                 <img className="is-rounded" src={author.photoURL} />
               </figure>
             </div> 
-          
-          <div className="media-content">
+          <div className="media-content ">
             <p className="subtitle is-size-7 has-text-link">{author.displayName} <h6 className="subtitle is-size-7 has-text-grey-darker">{comentario.content} <Moment fromNow>{comentario.createdAt}</Moment></h6></p>
             
           </div>
-          </div> )
+          </div> 
+            </Anime>
+          )
       }
       </>
     )

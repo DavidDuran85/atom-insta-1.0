@@ -103,6 +103,7 @@ class PostCard extends Component {
       comment,
       commentPost
     } = this.state
+    
     if (loading) {
       return <div>
         Cargando...
@@ -139,14 +140,15 @@ class PostCard extends Component {
           <img src={post.photoUrl} />
         </figure>
       </div>
-      <div className="card-content card-content-padding">
+      <div className="card-content card-content-padding ">
       {
         commentPost.map((p, i) => {
           return (
-            <CommentPost
-              comentario={p}
-              key={i}
-            />
+                <CommentPost
+                  comentario={p}
+                  key={i}
+                />
+            
           )
         })
       }
