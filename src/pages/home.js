@@ -40,7 +40,7 @@ class Home extends Component {
       posts
     } = this.state
     return (<div>
-      Insta Atom
+      
         <Post />
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">

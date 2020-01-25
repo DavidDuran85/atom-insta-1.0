@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import store from '../tree'
 import CommentPost from './comments'
+import Anime from 'react-anime'
 
 class PostCard extends Component {
   constructor(props) {
@@ -12,7 +13,8 @@ class PostCard extends Component {
       author: null,
       loading: true,
       comment:'',
-      commentPost: []
+      commentPost: [],
+      showanimate:false
     }
   }
   componentDidMount = () => {
@@ -85,8 +87,16 @@ class PostCard extends Component {
         createdAt: new Date().toJSON()
       })
       this.setState({
-        comment:''
-      })
+        comment:'',
+        showanimate: true
+      },() => {
+        setTimeout(() =>{
+          this.setState({
+            showanimate: false
+          })
+        }, 100)
+      }
+      )
       toast.success("Se envio el comentario!", {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -101,9 +111,17 @@ class PostCard extends Component {
       loading,
       author,
       comment,
-      commentPost
+      commentPost,
+      showanimate
     } = this.state
-    
+    let animeProps= showanimate ?  {
+      opacity: [0,1],
+      translateY:[-64,0],
+      delay: (el, i) => i * 100
+    } : {
+
+    }
+    console.log(this.state)
     if (loading) {
       return <div>
         Cargando...
@@ -141,9 +159,12 @@ class PostCard extends Component {
         </figure>
       </div>
       <div className="card-content card-content-padding ">
+      <Anime {...animeProps} >
       {
+        
         commentPost.map((p, i) => {
           return (
+                
                 <CommentPost
                   comentario={p}
                   key={i}
@@ -152,6 +173,8 @@ class PostCard extends Component {
           )
         })
       }
+      </Anime>
+      
       </div>
       {
         !readOnly && (<div className="card-footer">

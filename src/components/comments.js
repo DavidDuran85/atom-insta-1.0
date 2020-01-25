@@ -34,16 +34,12 @@ class CommentsPost extends Component {
     let {
       author
     } = this.state
-    let animeProps={
-      opacity: [0,1],
-      translateY:[-64,0],
-      delay: (el, i) => i * 3000
-    }
+    
     return (
       <>
       {
         !author.userID && (
-          <Anime {...animeProps} >
+          
                 <div className="media card-content-padding">
             <div className="media-left">
               <figure className="image card-image-comment">
@@ -55,7 +51,6 @@ class CommentsPost extends Component {
             
           </div>
           </div> 
-            </Anime>
           )
       }
       </>
