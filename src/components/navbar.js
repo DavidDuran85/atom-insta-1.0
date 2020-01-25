@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NewPost from './new-post'
+import Animacion from '../pages/animacion'
 
 class Navbar extends Component {
   state = {
@@ -28,7 +29,7 @@ class Navbar extends Component {
             Insta Atom
           </p>
         </Link>
-
+        {/*<Animacion container-anima/>*/}  
         <a role="button"
           onClick={this.handleMenu}
           className="navbar-burger burger"

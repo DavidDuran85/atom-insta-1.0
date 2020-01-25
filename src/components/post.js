@@ -4,20 +4,22 @@ import firebase from 'firebase'
 import LoadingBar from 'react-top-loading-bar'
 import { toast } from 'react-toastify'
 import uuid from 'uuid/v1'
+import tree from '../tree'
 
 class Post extends Component{
     constructor(props){
      super(props)
      this.state={
-         classNameModal: '',
-         errorForm:false,
-         formData:{
-             content:'',
-             image:''
-         },
+        classNameModal: '',
+        errorForm:false,
         progressUpload: 0,
         posts: [],
-        loading: false
+				loading: false,
+				user: tree.get("user"),
+				formData:{
+					content:'',
+					image:''
+			},
      }
     }
 
@@ -98,27 +100,27 @@ class Post extends Component{
         //crear post con la url
         let{
             formData: {content},
-            loading
+            user
         } = this.state
         let posts= firebase.database().ref('posts')
         let newpost= posts.push()
         newpost.set({
-            content,
-            photoUrl: url,
-            createdAt: new Date().toJSON(),
-            authorId: 'vr6yRaW4ttR5Mrn87rCFELGAex92'
+					content,
+					photoUrl: url,
+					createdAt: new Date().toJSON(),
+					authorId: user.id
         })
         this.setState({
             classNameModal:'',
             loading:false,
             formData:{
-                content:'',
-                image:''
+              content:'',
+              image:''
             }
         })
         toast.success("Se creo el Post!", {
-            position: toast.POSITION.TOP_RIGHT
-          });
+          position: toast.POSITION.TOP_RIGHT
+        });
     }
     render(){
         let{

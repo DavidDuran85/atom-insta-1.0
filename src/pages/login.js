@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import store from '../tree'
-
+import { toast } from 'react-toastify'
 class Login extends Component{
     constructor(props){
       super(props)
@@ -15,6 +15,7 @@ class Login extends Component{
         if( data.credential){
             let user = firebase.database().ref(`users/${data.user.uid}`)
             let userFormat = {
+              id:data.user.uid,
               displayName: data.user.displayName,
               photoURL: data.user.photoURL,
             }
@@ -34,7 +35,12 @@ class Login extends Component{
             })
         } 
       } catch (error) {
-        console.log(error)
+        this.setState({
+          loading:false
+        })
+        toast.error(`Error: ${error.message}`, {
+          position: toast.POSITION.TOP_RIGHT
+        });
       }
       
       /*firebase.auth().getRedirectResult().then( function (result){

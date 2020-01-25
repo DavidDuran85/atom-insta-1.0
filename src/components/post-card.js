@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import tree from '../tree'
 
 class PostCard extends Component {
   constructor(props) {
@@ -9,7 +10,9 @@ class PostCard extends Component {
     this.state = {
       author: null,
       loading: true,
-      comment:''
+      comment:'',
+      user: tree.get("user"),
+      disabled:false
     }
   }
   componentDidMount = () => {
@@ -40,22 +43,32 @@ class PostCard extends Component {
   handleSubmit = (e) => {
     e.preventDefault() //evitar que cambie de url
     const{
-      comment
+      comment,
+      user
     } = this.state
     const{
       post
     } = this.props
     if(comment){
+      this.setState({
+        disabled:true
+      })
       let Comments = firebase.database().ref(`postComments/${post.id}`)
-      let refCooments = Comments.push()
-      refCooments.set({
+      let refComments = Comments.push()
+      refComments.set({
         content: comment,
-        userID: 'vr6yRaW4ttR5Mrn87rCFELGAex92',
+        userID: user.id,
         createdAt: new Date().toJSON()
       })
       this.setState({
-        comment:''
-      })
+        comment:'',
+        placeholder:'Comentario enviado'
+      }, () =>{
+        this.setState({
+          placeholder:'Escribe un comentario',
+          disabled:false
+        })
+      }, 300)
       toast.success("Se envio el comentario!", {
           position: toast.POSITION.TOP_RIGHT
         });
@@ -69,7 +82,8 @@ class PostCard extends Component {
     let {
       loading,
       author,
-      comment
+      comment,
+      disabled
     } = this.state
     if (loading) {
       return <div>
@@ -108,7 +122,7 @@ class PostCard extends Component {
         </figure>
       </div>
       {
-        !readOnly && (<div className="card-footer">
+         <div className="card-footer">
           <form 
             onSubmit={this.handleSubmit}
             className="card-footer-item">
@@ -118,18 +132,21 @@ class PostCard extends Component {
                   value={comment}
                   className="input"
                   onChange={this.handleChange}
+                  disabled={disabled}
                   placeholder="Escribe un comentario..."
                 />
               </p>
               <p className="control">
-                <button className="button is-info">
+                <button 
+                  className="button is-info"
+                  disabled={disabled}>
                   Enviar
                 </button>
               </p>
             </div>
            
           </form>
-        </div>)
+        </div>
       }
     </div>)
   }

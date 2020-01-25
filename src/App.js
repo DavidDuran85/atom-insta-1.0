@@ -23,6 +23,7 @@ import Layout from './components/layout'
 import Home from './pages/home'
 import Login from './pages/login'
 import PostDetail from './pages/post-detail'
+import Animacion from './pages/animacion'
 
 
 let firebaseConfig = {
@@ -64,6 +65,10 @@ class App extends Component{
                component={PostDetail}>
 
               </Route>
+              <Route 
+                path="/anima" exact
+                component={Animacion}
+              />
             </Switch>
           </Layout>
           
