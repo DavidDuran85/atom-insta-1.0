@@ -7,6 +7,10 @@ import {
   Link //componente h-ref permite navegar entre paginas
 } from 'react-router-dom';
 
+//Baobab
+import { root } from 'baobab-react/higher-order'
+import store from './tree'
+
 // css
 import 'bulma/css/bulma.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +22,8 @@ import Layout from './components/layout'
 //pages
 import Home from './pages/home'
 import Login from './pages/login'
+import PostDetail from './pages/post-detail'
+import Animacion from './pages/animacion'
 
 
 let firebaseConfig = {
@@ -46,13 +52,22 @@ class App extends Component{
 
           <Layout>
             <Switch>
-              <Route 
+              {/* <Route 
                 path="/" exact
                 component={Login}
-              />
+              /> */}
               <Route 
-                path="/home" exact
+                path="/" exact
                 component={Home}
+              />
+              <Route
+               path="/post/:id"
+               component={PostDetail}>
+
+              </Route>
+              <Route 
+                path="/anima" exact
+                component={Animacion}
               />
             </Switch>
           </Layout>
@@ -62,4 +77,6 @@ class App extends Component{
   }
 }
 
-export default App;
+const RootedApp = root(store, App)
+
+export default RootedApp;

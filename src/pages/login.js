@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
-
-
+import store from '../tree'
+import { toast } from 'react-toastify'
 class Login extends Component{
     constructor(props){
       super(props)
@@ -10,18 +10,27 @@ class Login extends Component{
       }
     }
     componentDidMount = async () => {
+      console.log('componentDidMount')
       try {
         let data = await firebase.auth().getRedirectResult()
         if( data.credential){
             let user = firebase.database().ref(`users/${data.user.uid}`)
-            user.set({
+            let userFormat = {
+              id:data.user.uid,
               displayName: data.user.displayName,
               photoURL: data.user.photoURL,
-            })
-            let{
+            }
+            user.set(userFormat)
+            window.localStorage.setItem('user', JSON.stringify(userFormat))
+            console.log('userFormat', userFormat)
+            store.set("user",userFormat)
+            store.commit()
+						this.props.userStateChanged(userFormat)
+
+            /* let{
                 history
             } = this.props
-            history.push('/home') //redirecciona a la pagina(componente)
+            history.push('/home') */ //redirecciona a la pagina(componente)
           //console.log('Sesión iniciada')
           //console.log(this.props.history)
         } else {
@@ -30,7 +39,12 @@ class Login extends Component{
             })
         } 
       } catch (error) {
-        console.log(error)
+        this.setState({
+          loading:false
+        })
+        toast.error(`Error: ${error.message}`, {
+          position: toast.POSITION.TOP_RIGHT
+        });
       }
       
       /*firebase.auth().getRedirectResult().then( function (result){
@@ -90,7 +104,7 @@ class Login extends Component{
 
 
       return (
-          <div className="columns">
+          <div className="columns columns-main-login">
             <div className="column is-9">
                 <img src="/assets/preview.jpg" />
             </div>
