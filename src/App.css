@@ -34,6 +34,16 @@
   margin-top: 3rem;
 }
 
+.footer-image{
+  position: relative;
+  /* background: black; */
+  background-color: rgba(51,51,51,0.8);
+  /* opacity: 0.5; */
+  color: white;
+  height: 3rem;
+  bottom: 3rem;
+}
+
 .container-anima{
   width: 150px;
   height: 150px;
