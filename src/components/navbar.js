@@ -24,7 +24,6 @@ class Navbar extends Component {
       tree.set('user', null)
       tree.commit()
       window.localStorage.clear()
-      this.props.userStateChanged()
       this.props.history.push('/')
     })
     .catch( (error) => {
@@ -32,9 +31,7 @@ class Navbar extends Component {
     })
   }
   render () {
-    let {
-      userLogged
-    } = this.props
+    let userLogged = tree.get('user')
     let {
       collapsed
     } = this.state

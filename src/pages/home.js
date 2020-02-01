@@ -4,6 +4,7 @@ import LoadingBar from 'react-top-loading-bar'
 import { toast } from 'react-toastify'
 import Post from '../components/post'
 import PostCard from '../components/post-card'
+import { validateUser } from '../validate-user'
 
 //let task
 class Home extends Component{
@@ -14,6 +15,7 @@ class Home extends Component{
         }
     }
     componentDidMount = () => {
+			validateUser()
         let postsRef= firebase.database().ref('posts')
         postsRef.on('value', (snapshot) => {
             let posts = snapshot.val()

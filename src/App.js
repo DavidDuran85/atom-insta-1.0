@@ -52,12 +52,12 @@ class App extends Component{
 
           <Layout>
             <Switch>
-              {/* <Route 
-                path="/" exact
-                component={Login}
-              /> */}
               <Route 
                 path="/" exact
+                component={Login}
+              />
+              <Route 
+                path="/home" exact
                 component={Home}
               />
               <Route

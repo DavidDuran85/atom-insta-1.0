@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import store from '../tree'
 import { toast } from 'react-toastify'
+
 class Login extends Component{
     constructor(props){
       super(props)
@@ -25,12 +26,7 @@ class Login extends Component{
             console.log('userFormat', userFormat)
             store.set("user",userFormat)
             store.commit()
-						this.props.userStateChanged(userFormat)
-
-            /* let{
-                history
-            } = this.props
-            history.push('/home') */ //redirecciona a la pagina(componente)
+						this.props.history.push('/home') //redirecciona a la pagina(componente)
           //console.log('Sesión iniciada')
           //console.log(this.props.history)
         } else {
