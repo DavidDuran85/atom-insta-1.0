@@ -1,0 +1,24 @@
+pagina prueba blazepixel
+cerbot
+
+
+ssh app@162.168.0.120
+
+git clone git@github.com:XDRAKE85/atom-insta-1.0.git
+npm install
+npm run build
+
+
+server_name atominsta.mx
+root /home
+
+
+
+https://console.firebase.google.com/u/1/project/atom-insta85/authentication/providers
+https://firebase.google.com/s/results/?q=realtime%20orderby&hl=es
+https://www.npmjs.com/package/html-pdf
+https://www.digitalocean.com/pricing/
+https://www.hostinger.mx/tutoriales/a-record
+https://www.nginx.com
+https://www.docker.com
+https://certbot.eff.org
